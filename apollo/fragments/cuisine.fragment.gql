@@ -1,0 +1,8 @@
+fragment CuisineFragment on Cuisine {
+    id
+    key
+    name
+    description
+    locale
+    slug
+}

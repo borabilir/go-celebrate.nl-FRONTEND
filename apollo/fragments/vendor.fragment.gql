@@ -1,0 +1,56 @@
+#import "./file.fragment.gql"
+#import "./status.fragment.gql"
+fragment VendorFragment on Vendor {
+    name
+    slug
+    key
+    email
+    website
+    facebook
+    instagram
+    phone
+    introduction
+    publishedAt
+    locale
+    legacyPortfolioPage
+    archive
+    importStatus
+    externalReference
+    status {
+        data {
+            ...StatusFragment
+        }
+    }
+    localizations {
+        data {
+            id
+            attributes {
+                locale
+            }
+        }
+    }
+    debtor {
+        data {
+            id
+            attributes {
+                companyName
+            }
+        }
+    }
+    logo {
+        data {
+            id
+            attributes {
+                ...FileFragment
+            }
+        }
+    }
+    contact {
+        id
+        firstName
+        lastName
+        prefixName
+        email
+        phone
+    }
+}

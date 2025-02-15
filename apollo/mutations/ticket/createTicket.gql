@@ -1,0 +1,20 @@
+#import "../../fragments/ticket.fragment.gql"
+
+mutation CreateTicket(
+    $data: TicketInput!
+    # Optional arguments to filter messages
+    $sortTicketMessages: [String]
+    $filtersTicketMessages: TicketMessageFiltersInput
+    $paginationTicketMessages: PaginationArg
+) {
+    createTicket(
+        data: $data
+    ) {
+        data {
+            id
+            attributes {
+                ...TicketFragment
+            }
+        }
+    }
+}

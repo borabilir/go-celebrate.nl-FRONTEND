@@ -1,0 +1,1 @@
+export { generateStoryMetadata } from './generateStoryMetadata';

@@ -1,0 +1,17 @@
+#import "./file.fragment.gql"
+fragment TicketMessageFragment on TicketMessage {
+    direction
+    from
+    to
+    message
+    createdAt
+    updatedAt
+    attachments {
+        data {
+            id
+            attributes {
+                ...FileFragment
+            }
+        }
+    }
+}

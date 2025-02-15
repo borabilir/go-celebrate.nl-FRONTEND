@@ -1,0 +1,5 @@
+fragment OccasionBase on Occasion {
+    name
+    locale
+    key
+}

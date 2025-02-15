@@ -1,0 +1,33 @@
+query AttributeDefinitionsQuery(
+    $filters: AttributeDefinitionFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
+    $locale: I18NLocaleCode
+) {
+  attributeDefinitions(
+    filters: $filters
+    pagination: $pagination
+    sort: $sort
+    locale: $locale
+  ) {
+    data {
+      id
+      attributes {
+        name
+        key
+        locale
+        attributeType {
+          data {
+            id
+            attributes {
+              name
+              key
+              locale
+              allowAsPreference
+            }
+          }
+        }
+      }
+    }
+  }
+}

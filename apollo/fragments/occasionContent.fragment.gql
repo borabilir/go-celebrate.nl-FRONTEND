@@ -1,0 +1,4 @@
+fragment OccasionContent on Occasion {
+    excerpt
+    description
+}

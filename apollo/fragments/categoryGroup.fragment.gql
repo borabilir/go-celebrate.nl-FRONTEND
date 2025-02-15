@@ -1,0 +1,16 @@
+fragment CategoryGroupFragment on CategoryGroup {
+    name
+    key
+    locale
+    publishedAt
+    localizations {
+        data {
+            id
+            attributes {
+                name
+                key
+                publishedAt
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+#import "../../fragments/offering.details.fragment.gql"
+#import "../../fragments/meta.fragment.gql"
+
+query OfferingsQuery(
+    $filters: OfferingFiltersInput,
+    $pagination: PaginationArg,
+    $sort: [String],
+    $locale: I18NLocaleCode
+    $publicationState: PublicationState,
+) {
+    offerings(
+        filters: $filters,
+        pagination: $pagination,
+        sort: $sort,
+        locale: $locale,
+        publicationState: $publicationState
+    ) {
+        data {
+            id
+            attributes {
+                ... OfferingDetailsFragment
+            }
+        }
+        meta {
+            ... MetaFragment
+        }
+    }
+}

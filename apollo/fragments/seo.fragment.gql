@@ -1,0 +1,34 @@
+#import "./file.fragment.gql"
+
+fragment SeoFragment on ComponentSharedSeo {
+    id
+    metaTitle
+    metaDescription
+    metaImage {
+        data {
+            id
+            attributes {
+                ...FileFragment
+            }
+        }
+    }
+    metaSocial {
+        id
+        socialNetwork
+        title
+        description
+        image {
+            data {
+                id
+                attributes {
+                    ...FileFragment
+                }
+            }
+        }
+    }
+    keywords
+    metaRobots
+    structuredData
+    metaViewport
+    canonicalURL
+}

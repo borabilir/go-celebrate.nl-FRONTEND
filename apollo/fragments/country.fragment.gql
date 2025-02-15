@@ -1,0 +1,5 @@
+fragment CountryFragment on Country {
+    name
+    key
+    slug
+}

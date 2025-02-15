@@ -1,0 +1,17 @@
+#import "../../fragments/offering.fragment.gql"
+query OfferingQuery(
+    $id: ID!
+    $locale: I18NLocaleCode = "all"
+) {
+    offering(
+        id: $id
+        locale: $locale
+    ) {
+        data {
+            id
+            attributes {
+                ...OfferingFragment
+            }
+        }
+    }
+}

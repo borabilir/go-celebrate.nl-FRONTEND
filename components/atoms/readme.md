@@ -1,0 +1,1 @@
+Atoms are components that are composable inside Storyblock's Rich text field. So atoms can be children of blocks.

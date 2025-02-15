@@ -1,0 +1,91 @@
+#import "../../fragments/file.fragment.gql"
+query MyEventsQuery($filters: EventFiltersInput, $sort: [String], $pagination: PaginationArg) {
+    myEvents(filters: $filters, sort: $sort, pagination: $pagination) {
+        data {
+            id
+            attributes {
+                name
+                description
+                startDate
+                endDate
+                paidBy
+                dealId
+                numberOfGuests
+                budgetPerPerson
+                preferredLocale
+                eventServices {
+                    data {
+                        id
+                        attributes {
+                            shortList {
+                                data {
+                                    id
+                                    attributes {
+                                        name
+                                        key
+                                        coverPhoto {
+                                            data {
+                                                id
+                                                attributes {
+                                                    ...FileFragment
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                status {
+                    data {
+                        id
+                        attributes {
+                            colorHex
+                            label
+                            type
+                        }
+                    }
+                }
+                occasion {
+                    data {
+                        id
+                        attributes {
+                            name
+                            key
+                            locale
+                        }
+                    }
+                }
+                owner {
+                    data {
+                        id
+                        attributes {
+                            username
+                            firstName
+                            lastName
+                            email
+                            role {
+                                data {
+                                    id
+                                    attributes {
+                                        name
+                                        description
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        meta {
+            pagination {
+                total
+                page
+                pageSize
+                pageCount
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 4203728, 2021-10-30T14:47:01-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: RebrandTxt-Regular by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/rebrand/text-regular/
+ * 
+ * Webfont: RebrandTxt-Medium by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/rebrand/text-medium/
+ * 
+ * Webfont: RebrandDis-Medium by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/rebrand/display-medium/
+ * 
+ * Webfont: RebrandDis-Bold by Latinotype
+ * URL: https://www.myfonts.com/fonts/latinotype/rebrand/display-bold/
+ * 
+ * 
+ * Webfonts copyright: Copyright © 2021 by Latinotype. All rights reserved.
+ * 
+ * © 2021 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+
+/* TODO: Enable counter in production */
+// @import url("//hello.myfonts.net/count/4024d0");
+  
+@font-face {
+  font-family: "RebrandDis";
+  src: url('/fonts/RebrandDisMedium/font.woff2') format('woff2'), url('/fonts/RebrandDisMedium/font.woff') format('woff');
+  font-display: swap;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "RebrandDis";
+  src: url('/fonts/RebrandDisBold/font.woff2') format('woff2'), url('/fonts/RebrandDisBold/font.woff') format('woff');
+  font-display: swap;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "RebrandTxt";
+  src: url('/fonts/RebrandTxtRegular/font.woff2') format('woff2'), url('/fonts/RebrandTxtRegular/font.woff') format('woff');
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "RebrandTxt";
+  src: url('/fonts/RebrandTxtMedium/font.woff2') format('woff2'), url('/fonts/RebrandTxtMedium/font.woff') format('woff');
+  font-display: swap;
+  font-weight: 500;
+}
+

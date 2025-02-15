@@ -1,0 +1,17 @@
+#import "../../fragments/vendor.fragment.gql"
+
+query VendorQuery(
+    $id: ID
+) {
+    vendor(
+        id: $id
+    ) {
+        data {
+          id
+          attributes {
+            ...VendorFragment
+          }
+        }
+
+    }
+}

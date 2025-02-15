@@ -1,0 +1,8 @@
+fragment MetaFragment on ResponseCollectionMeta {
+    pagination {
+        total
+        pageSize
+        pageCount
+        page
+    }
+}

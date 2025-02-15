@@ -1,0 +1,24 @@
+mutation CreateRfq(
+    $message: String
+    $user: UsersPermissionsUserInput
+    $event: EventInput
+    $eventServices: [EventServiceInput!]
+    $locale: I18NLocaleCode
+) {
+    createRfq(
+        message: $message
+        user: $user
+        event: $event
+        eventServices: $eventServices
+        locale: $locale
+    ) {
+        id
+        attributes {
+            title
+            token
+            createdAt
+            updatedAt
+            quoteNumber
+        }
+    }
+}

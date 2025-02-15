@@ -1,0 +1,11 @@
+.table-of-content-link {
+    a {
+        text-decoration: none !important;
+        &:hover {
+            text-decoration: underline !important;
+        }
+    }
+    &:not(.nested) {
+        @apply pl-1;
+    }
+}

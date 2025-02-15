@@ -1,0 +1,53 @@
+#import "./category.fragment.gql"
+#import "./file.fragment.gql"
+
+fragment OfferingFragment on Offering {
+    id: key
+    name
+    key
+    description
+    locale
+    excerpt
+    publishedAt
+    localizations {
+        data {
+            id
+            attributes {
+                locale
+            }
+        }
+    }
+    categories {
+        data {
+            id
+            attributes {
+                ...CategoryFragment
+            }
+        }
+    }
+    coverPhoto {
+        data {
+            id
+            attributes {
+                ...FileFragment
+            }
+        }
+    }
+    vendor {
+        data {
+            id
+            attributes {
+                name
+                key
+                logo {
+                    data {
+                        id
+                        attributes {
+                            ...FileFragment
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

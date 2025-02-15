@@ -1,0 +1,31 @@
+#import "./ticketMessage.fragment.gql"
+fragment TicketFragment on Ticket {
+    firstName
+    lastName
+    email
+    phone
+    vendor {
+        data {
+            id
+        }
+    }
+    assignee {
+        data {
+            id
+        }
+    }
+    createdAt
+    updatedAt
+    ticketMessages(
+        sort: $sortTicketMessages
+        filters: $filtersTicketMessages
+        pagination: $paginationTicketMessages
+    ) {
+        data {
+            id
+            attributes {
+                ...TicketMessageFragment
+            }
+        }
+    }
+}

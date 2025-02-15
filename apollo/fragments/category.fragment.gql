@@ -1,0 +1,17 @@
+fragment CategoryFragment on Category {
+    name
+    id: key
+    key
+    locale
+    publishedAt
+    allowedAttributes {
+        data {
+            id
+            attributes {
+                name
+                key
+                valueType
+            }
+        }
+    }
+}

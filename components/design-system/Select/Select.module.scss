@@ -1,0 +1,10 @@
+.input {
+    &.ghost {
+        @apply border-none bg-transparent;
+    }
+    @apply text-base font-normal text-gray-700;
+}
+
+.dropdownItem {
+    @apply text-base;
+}

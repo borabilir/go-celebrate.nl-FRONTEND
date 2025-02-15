@@ -1,0 +1,16 @@
+#import "../../fragments/cuisine.fragment.gql"
+
+query CuisinesQuery(
+    $where: JSON
+    $locale: String
+    $sort: String
+) {
+    cuisines(
+        where: $where
+        locale: $locale
+        sort: $sort
+        limit: 1000
+    ) {
+        ...CuisineFragment
+    }
+}

@@ -1,0 +1,20 @@
+#import "../../fragments/vendor.fragment.gql"
+
+mutation UpdateVendorMutation(
+    $id: ID!
+    $data: VendorInput!
+    $locale: I18NLocaleCode
+) {
+    updateVendor(
+        id: $id
+        data: $data
+        locale: $locale
+    ) {
+        data {
+            id
+            attributes {
+                ...VendorFragment
+            }
+        }
+    }
+}

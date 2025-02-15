@@ -1,0 +1,4 @@
+fragment AddressType on AddressType {
+    label
+    key
+}

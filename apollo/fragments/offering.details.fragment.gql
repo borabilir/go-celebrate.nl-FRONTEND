@@ -1,0 +1,157 @@
+#import "./category.fragment.gql"
+#import "./file.fragment.gql"
+#import "./seo.fragment.gql"
+
+fragment OfferingDetailsFragment on Offering {
+    id: key
+    name
+    key
+    description
+    locale
+    excerpt
+    publishedAt
+    createdAt
+    updatedAt
+    capacityMin
+    capacityMax
+    flexibleCapacity
+    localizations {
+        data {
+            id
+            attributes {
+                locale
+            }
+        }
+    }
+    categories {
+        data {
+            id
+            attributes {
+                ...CategoryFragment
+            }
+        }
+    }
+    offeringAttributes {
+        data {
+            id
+            attributes {
+                value
+                locale
+                attributeType {
+                    data {
+                        id
+                        attributes {
+                            name
+                            key
+                            valueType
+                        }
+                    }
+                }
+                attributeDefinitions {
+                    data {
+                        id
+                        attributes {
+                            name
+                            key
+                        }
+                    }
+                }
+            }
+        }
+    }
+    coverPhoto {
+        data {
+            id
+            attributes {
+                ...FileFragment
+            }
+        }
+    }
+    images {
+        data {
+            id
+            attributes {
+                ...FileFragment
+            }
+        }
+    }
+    vendor {
+        data {
+            id
+            attributes {
+                name
+                introduction
+                website
+                facebook
+                instagram
+                email
+                phone
+                logo {
+                    data {
+                        id
+                        attributes {
+                            ...FileFragment
+                        }
+                    }
+                }
+                localizations {
+                    data {
+                        id
+                        attributes {
+                            locale
+                        }
+                    }
+                }
+            }
+        }
+    }
+    serviceRadius
+    baseCity {
+        data {
+            id
+            attributes {
+                name
+                key
+            }
+        }
+    }
+    baseCounty {
+        data {
+            id
+            attributes {
+                name
+                key
+            }
+        }
+    }
+    baseRegion {
+        data {
+            id
+            attributes {
+                name
+                key
+            }
+        }
+    }
+    baseCountry {
+        data {
+            id
+            attributes {
+                name
+                key
+            }
+        }
+    }
+    occasions {
+        data {
+            id
+            attributes {
+                name
+                key
+            }
+        }
+    }
+    seo {
+        ...SeoFragment
+    }
+}

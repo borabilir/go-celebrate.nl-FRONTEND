@@ -1,0 +1,11 @@
+fragment MdmFile on UploadFile {
+    name
+    alternativeText
+    caption
+    width
+    height
+    ext
+    size
+    url
+    provider_metadata
+}

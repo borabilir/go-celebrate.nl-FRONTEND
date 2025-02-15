@@ -1,0 +1,27 @@
+#import "../../fragments/categoryGroupWithCategories.fragment.gql"
+#import "../../fragments/meta.fragment.gql"
+
+query CategoryGroupsQuery(
+    $filters: CategoryGroupFiltersInput
+    $sort: [String]
+    $locale: I18NLocaleCode
+    $pagination: PaginationArg
+    $categoriesPagination: PaginationArg
+) {
+    categoryGroups(
+        filters: $filters
+        sort: $sort
+        locale: $locale
+        pagination: $pagination
+    ) {
+        meta {
+            ...MetaFragment
+        }
+        data {
+            id
+            attributes {
+                ...CategoryGroupWithCategoriesFragment
+            }
+        }
+    }
+}

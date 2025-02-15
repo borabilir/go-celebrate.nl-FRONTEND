@@ -1,0 +1,12 @@
+.separator {
+    margin-top: 32px !important;
+    @media (min-width: 768px) {
+        margin-top: 64px !important;
+    }
+    & + section {
+        margin-top: 32px !important;
+        @media (min-width: 768px) {
+            margin-top: 64px !important;
+        }
+    }
+}

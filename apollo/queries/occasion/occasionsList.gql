@@ -1,0 +1,25 @@
+#import "../../fragments/meta.fragment.gql"
+#import "../../fragments/occasion.fragment.gql"
+query OccasionsQuery(
+    $filters: OccasionFiltersInput
+    $sort: [String]
+    $locale: I18NLocaleCode
+    $pagination: PaginationArg
+) {
+    occasions(
+        filters: $filters
+        sort: $sort
+        locale: $locale
+        pagination: $pagination
+    ) {
+        meta {
+            ...MetaFragment
+        }
+        data {
+            id
+            attributes {
+                ...OccasionBase
+            }
+        }
+    }
+}

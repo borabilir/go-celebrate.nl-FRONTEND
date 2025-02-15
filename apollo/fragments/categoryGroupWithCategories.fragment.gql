@@ -1,0 +1,43 @@
+fragment CategoryGroupWithCategoriesFragment on CategoryGroup {
+    name
+    key
+    locale
+    publishedAt
+    categories(sort: $sort, pagination: $categoriesPagination) {
+        data {
+            id
+            attributes {
+                id: key
+                name
+                key
+                locale
+                publishedAt
+                allowedAttributes {
+                    data {
+                        id
+                        attributes {
+                            id: key
+                            name
+                            key
+                            valueType
+                            allowAsPreference
+                            attributeDefinitions(
+                                pagination: { limit: 1000 }
+                                sort: $sort
+                            ) {
+                                data {
+                                    id
+                                    attributes {
+                                        id: key
+                                        name
+                                        key
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

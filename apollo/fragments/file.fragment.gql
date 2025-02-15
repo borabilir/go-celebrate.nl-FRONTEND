@@ -1,0 +1,12 @@
+fragment FileFragment on UploadFile {
+    width
+    height
+    url
+    ext
+    name
+    size
+    previewUrl
+    provider
+    caption
+    alternativeText
+}

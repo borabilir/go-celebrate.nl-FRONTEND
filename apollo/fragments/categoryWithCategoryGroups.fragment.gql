@@ -1,0 +1,35 @@
+#import "./categoryGroup.fragment.gql"
+fragment CategoryFragment on Category {
+    name
+    key
+    locale
+    publishedAt
+    categoryGroup {
+        data {
+            id
+            attributes {
+                ...CategoryGroupFragment
+            }
+        }
+    }
+    allowedAttributes {
+        data {
+            id
+            attributes {
+                name
+                key
+                valueType
+            }
+        }
+    }
+    localizations {
+        data {
+            id
+            attributes {
+                name
+                key
+                publishedAt
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+// @import './fonts';
+@import './typography';
+@import './blocks/rich-text';
+@import './components/swiper';
+
+html {
+    background-color: white;
+}
+
+body * {
+    -webkit-font-smoothing: subpixel-antialiased !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+.swiper-wrapper {
+    align-items: stretch;
+}
+
+/* Make swiper slides equal height */
+
+.swiper-slide {
+    height: auto !important;
+}

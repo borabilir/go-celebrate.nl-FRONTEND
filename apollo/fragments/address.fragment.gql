@@ -1,0 +1,25 @@
+#import "./addressType.fragment.gql"
+#import "./country.fragment.gql"
+fragment AddressFragment on Address {
+    line_1
+    line_2
+    city
+    state
+    country {
+        data {
+            id
+            attributes {
+                ...CountryFragment
+            }
+        }
+    }
+    zip
+    address_type {
+        data {
+            id
+            attributes {
+                ...AddressType
+            }
+        }
+    }
+}

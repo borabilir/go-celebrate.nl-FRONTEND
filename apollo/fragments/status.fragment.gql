@@ -1,0 +1,9 @@
+fragment StatusFragment on StatusEntity {
+  id
+  attributes {
+    label
+    type
+    order
+    colorHex
+  }
+}

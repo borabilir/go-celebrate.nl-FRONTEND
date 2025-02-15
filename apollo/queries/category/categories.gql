@@ -1,0 +1,26 @@
+#import "../../fragments/category.fragment.gql"
+#import "../../fragments/meta.fragment.gql"
+
+query CategoriesQuery(
+    $filters: CategoryFiltersInput
+    $sort: [String]
+    $locale: I18NLocaleCode
+    $pagination: PaginationArg
+) {
+    categories(
+        filters: $filters
+        sort: $sort
+        locale: $locale
+        pagination: $pagination
+    ) {
+        meta {
+            ...MetaFragment
+        }
+        data {
+            id
+            attributes {
+                ...CategoryFragment
+            }
+        }
+    }
+}
