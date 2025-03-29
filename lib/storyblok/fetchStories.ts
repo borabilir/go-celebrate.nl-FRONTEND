@@ -11,6 +11,7 @@ import { getErrorMessage } from '@/utils/errors'
  * if a slug is provided.
  */
 export async function fetchStories(params: GetStoriesParams): Promise<GetStoriesResponse> {
+    console.log("Inside fetchStories async function");
     const { slug, cv, ...storyblokApiParams } = params
     const storyblokApi = getStoryblokApi()
     const sbParams: any = {
@@ -37,9 +38,11 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         }
     })
     let storyUrl = `cdn/stories/${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/`
+    console.log("storyUrl 1: ", storyUrl);
     if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
         storyUrl += `${params.language}/`
     }
+    console.log("storyUrl 2: ", storyUrl);
     if (slug) {
         /**
          * We need to get rid of the deployment name from the slug, that is prepended in preview mode
@@ -54,6 +57,7 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
     }
     try {
         const response = await storyblokApi.get(storyUrl, sbParams)
+        console.log("✅ Response from Storyblok: ", response.data);
         const data = await response?.data
         return data
     } catch (error) {

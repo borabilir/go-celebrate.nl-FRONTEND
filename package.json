@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run manifest ; concurrently \"NODE_OPTIONS='--inspect' next dev\" \"local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem\"",
-    "slim-dev": "npm run manifest ; next dev",
-    "build": "npm run manifest ; next build",
+    "dev": "npm run manifest && concurrently \"NODE_OPTIONS='--inspect' next dev\" \"local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem\"",
+    "slim-dev": "npm run manifest && next dev",
+    "build": "npm run manifest && next build",
     "start": "next start",
     "lint": "next lint",
     "manifest": "node lib/manifest.js",
