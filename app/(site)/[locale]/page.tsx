@@ -48,22 +48,40 @@ export async function generateStaticParams({ params }: { params: any }) {
 
 export default async function Home({ params, searchParams }: PageParams) {
     const { locale, slug } = params
+    console.log("Page component params:", { locale, slug });
     /**
      * Automatically return notFound if it looks like a file path was requested as app updates result
      * in a new deployment and the old files are not available anymore.
      */
-    if (slug && slug[slug.length - 1].includes('.')) notFound()
+    if (slug && slug[slug.length - 1].includes('.')) {
+        console.log("File path detected, returning notFound");
+        notFound()
+    }
+    console.log("Fetching story with params:", {
+        language: locale,
+        slug: slug ? slug : [],
+        resolve_links: 'story'
+    });
     const { story, error } = await fetchStories({
         language: locale,
         slug: slug ? slug : [],
         resolve_links: 'story',
     })
     if (!story || error) {
-        console.log('[CONTENT] ❌ Story not found for page', slug)
+        console.log('[CONTENT] ❌ Story not found for page', {
+            slug,
+            error,
+            story: story ? 'exists' : 'missing',
+            params: { locale, slug }
+        });
         if (error) console.error(`[CONTENT] Error: ${error}`)
         notFound()
     }
-    console.log('[CONTENT] ✅ Story fetched: ', story.name, story.full_slug)
+    console.log('[CONTENT] ✅ Story fetched: ', {
+        name: story.name,
+        full_slug: story.full_slug,
+        component: story.content?.component
+    });
     return (
         <StoryblokComponent
             blok={story.content}

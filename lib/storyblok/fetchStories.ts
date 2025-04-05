@@ -12,6 +12,7 @@ import { getErrorMessage } from '@/utils/errors'
  */
 export async function fetchStories(params: GetStoriesParams): Promise<GetStoriesResponse> {
     console.log("Inside fetchStories async function");
+    console.log("Params received:", JSON.stringify(params, null, 2));
     const { slug, cv, ...storyblokApiParams } = params
     const storyblokApi = getStoryblokApi()
     const sbParams: any = {
@@ -22,6 +23,7 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         cv: cv ? cv : process.env.NODE_ENV === 'production' ? undefined : Date.now(),
         token: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
     }
+    console.log("Storyblok API params:", JSON.stringify(sbParams, null, 2));
     /**
      * Transform each field from the params object into valid a query string.
      */
@@ -38,30 +40,37 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         }
     })
     let storyUrl = `cdn/stories/${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/`
-    console.log("storyUrl 1: ", storyUrl);
+    console.log("Initial storyUrl:", storyUrl);
     if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
         storyUrl += `${params.language}/`
     }
-    console.log("storyUrl 2: ", storyUrl);
+    console.log("StoryUrl after language:", storyUrl);
     if (slug) {
         /**
          * We need to get rid of the deployment name from the slug, that is prepended in preview mode
          * in the Storyblok editor.
          */
         const cleanedSlug = slug?.filter((s) => s !== process.env.NEXT_PUBLIC_DEPLOYMENT_NAME) || []
+        console.log("Cleaned slug:", cleanedSlug);
         /**
          * Add the deployment name manually to ensure both production (without deployment name in the
          * slug) and preview mode (with deployment name prepended in the slug) work.
          */
         storyUrl += `${cleanedSlug?.join('/')}`
     }
+    console.log("Final storyUrl:", storyUrl);
     try {
+        console.log("Attempting to fetch from Storyblok with URL:", storyUrl);
         const response = await storyblokApi.get(storyUrl, sbParams)
-        console.log("✅ Response from Storyblok: ", response.data);
+        console.log("✅ Response from Storyblok: ", JSON.stringify(response.data, null, 2));
         const data = await response?.data
         return data
     } catch (error) {
-        console.error('[error] FetchStories', { storyUrl }, { error })
+        console.error('[error] FetchStories', { 
+            storyUrl,
+            params: sbParams,
+            error: error instanceof Error ? error.message : error
+        })
         return {
             stories: [],
             story: null,
