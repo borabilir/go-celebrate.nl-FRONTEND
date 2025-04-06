@@ -1,3 +1,5 @@
+// it is for dynamic imports
+
 import { storyblokInit, apiPlugin } from '@storyblok/react/rsc'
 import dynamic from 'next/dynamic'
 

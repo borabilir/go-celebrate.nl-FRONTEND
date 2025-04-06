@@ -1,3 +1,5 @@
+// wrapper to wrap around fetching data for stories end point. 
+
 import qs from 'qs'
 // @ts-ignore
 import { getStoryblokApi } from '@storyblok/react/rsc'
@@ -41,7 +43,8 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
     })
     let storyUrl = `cdn/stories/${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/`
     console.log("Initial storyUrl:", storyUrl);
-    if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
+    // if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
+    if (params.language) {
         storyUrl += `${params.language}/`
     }
     console.log("StoryUrl after language:", storyUrl);

@@ -39,7 +39,8 @@ module.exports = withBundleAnalyzer({
             'via.placeholder.com',
             'res.cloudinary.com',
             '*.supabase.co',
-            'yuzgedshzpirrfvcbvmx.supabase.co',
+            // 'yuzgedshzpirrfvcbvmx.supabase.co', 
+            process.env.NEXT_PUBLIC_SUPABASE_URL.replace('https://', ''), // Adding your Supabase URL dynamically
         ],
     },
     /* i18n: {
@@ -51,8 +52,12 @@ module.exports = withBundleAnalyzer({
         defaultLocale: 'nl',
         localeDetection: false,
     }, */
+    // env: {
+    //     // GTM_ID: process.env.GTM_ID
+    // },
     env: {
-        // GTM_ID: process.env.GTM_ID
+        NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     },
     experimental: { esmExternals: true },
 })

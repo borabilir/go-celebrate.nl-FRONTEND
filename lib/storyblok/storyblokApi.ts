@@ -1,3 +1,5 @@
+// get method for storyBlokApi is defined in here.
+
 import qs from 'qs';
 
 export function storyblokApi() {

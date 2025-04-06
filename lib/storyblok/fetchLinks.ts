@@ -1,3 +1,7 @@
+// You just get the links with the fetchLinks async function. 
+// This is for when you just want to see the contents on the CMS 
+// but not the whole story. 
+
 import qs from 'qs';
 // @ts-ignore
 import { getStoryblokApi } from '@storyblok/react/rsc';
