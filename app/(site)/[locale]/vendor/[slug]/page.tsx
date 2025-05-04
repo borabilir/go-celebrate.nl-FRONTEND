@@ -21,7 +21,9 @@ export async function generateStaticParams() {
             slugs.push({ slug: offering.attributes.key })
         })
     }
-    console.log('[generateStaticParams] Static params fetched for', slugs.length, 'slugs.')
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log('[generateStaticParams] Static params fetched for', slugs.length, 'slugs.')
+    }
     return slugs
 }
 

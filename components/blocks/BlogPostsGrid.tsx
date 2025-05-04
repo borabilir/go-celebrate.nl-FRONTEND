@@ -9,7 +9,9 @@ export interface BlogPostGridProps {
 
 export function BlogPostsGrid({ blok }: { blok: BlogPostGridProps }) {
     const { posts = [], blogUrl } = blok
-    console.log(blogUrl)
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log(blogUrl)
+    }
     return (
         <Section>
             <h2 className="sr-only">Articles</h2>

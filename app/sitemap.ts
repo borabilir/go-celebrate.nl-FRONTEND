@@ -38,7 +38,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         let i = 1
         while ((i - 1) * data?.perPage < data?.total) {
             const newData = await fetchStoryes(storyblokApi, locale, i)
-            console.log('newData length', i, newData?.stories?.length)
+            if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                console.log('newData length', i, newData?.stories?.length) 
+            }
             data = {
                 stories: [...data?.stories, ...newData?.stories],
                 perPage: newData.perPage,

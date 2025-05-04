@@ -40,3 +40,7 @@ yarn-error.log*
 
 #secrets files
 secrets.txt
+
+# Deprecated files/folders
+/pages__DEPR__
+/pages__DEPR__/*

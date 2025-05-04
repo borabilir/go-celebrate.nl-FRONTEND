@@ -60,7 +60,9 @@ export async function generateStaticParams() {
             }
         })
     }
-    console.log('[generateStaticParams] Static params for content [slug] fetched. Total pages: ', slugCollection.length)
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log('[generateStaticParams] Static params for content [slug] fetched. Total pages: ', slugCollection.length)
+    }
     return slugCollection
 }
 

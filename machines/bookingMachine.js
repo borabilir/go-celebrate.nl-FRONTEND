@@ -161,8 +161,10 @@ export const createBookingMachine = createMachine({
                             })
                             _attributeDefinitions = attributeDefinitionsData ? attributeDefinitionsData.data : undefined
                         }
-                        console.log(_attributeDefinitions)
-                        console.log('Start', _start, new Date(_start))
+                        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                            console.log(_attributeDefinitions)
+                            console.log('Start', _start, new Date(_start))
+                        }
                         callback({
                             type: 'DONE',
                             data: {
@@ -176,7 +178,7 @@ export const createBookingMachine = createMachine({
                         })
                     } catch (error) {
                         // window undefined error will occur on server
-                        console.log(error)
+                        console.error(error)
                     }
                 },
             },
@@ -256,7 +258,9 @@ export const createBookingMachine = createMachine({
             },
             invoke: {
                 src: (context, event) => async (callback) => {
-                    console.log(context)
+                    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                        console.log(context)
+                    }
                     try {
                         const {
                             data: { createRfq },

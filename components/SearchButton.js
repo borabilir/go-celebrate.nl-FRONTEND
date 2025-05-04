@@ -7,7 +7,9 @@ import { searchPromoptOpenAtom } from '@/context/ui'
 export default function SearchButton({ className }) {
     const [open, setOpen] = useAtom(searchPromoptOpenAtom)
     function handleOpen() {
-        console.log('handleOpen', open)
+        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+            console.log('handleOpen', open)
+        }
         setOpen(!open)
     }
     return (

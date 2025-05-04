@@ -33,8 +33,10 @@ export const createRegisterMachine = createMachine({
             type: 'final',
             data: {
                 user: (context, event) => {
-                    console.log(context)
-                    console.log(event)
+                    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                        console.log(context)
+                        console.log(event)
+                    }
                     return {
                         firstName: context.firstName,
                         lastName: context.lastName,

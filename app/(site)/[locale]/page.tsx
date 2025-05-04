@@ -14,7 +14,9 @@ export async function generateMetadata(props: PageParams): Promise<Metadata> {
 }
 
 export async function generateStaticParams({ params }: { params: any }) {
-    console.log('[generateStaticParams] Fetching static params for [locale].')
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log('[generateStaticParams] Fetching static params for [locale].')
+    }
     const slugCollection: { [key: string]: string | string[] }[] = []
     // Get the root links for a given deployment name.
     const result = await fetchStories({
@@ -28,60 +30,76 @@ export async function generateStaticParams({ params }: { params: any }) {
         // Loop over the translated_slugs of the story to check if the content exists in other locales.
         for (const index in result.story.translated_slugs) {
             const storyTranslatedSlug = result.story.translated_slugs[index]
-            console.log('Fetching for', storyTranslatedSlug.lang)
+            if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                console.log('Fetching for', storyTranslatedSlug.lang)
+            }
             const localeStory = await fetchStories({
                 slug: [],
                 language: storyTranslatedSlug.lang,
             })
-            console.log('Locale story fetched...')
+            if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                console.log('Locale story fetched...')
+            }
             // If a story exist, we support that locale, let's generate the content for it.
             if (localeStory?.story) slugCollection.push({ locale: storyTranslatedSlug.lang })
         }
     }
-    console.log(
-        `[generateStaticParams] Static params fetched for ${slugCollection.length} locales: ${slugCollection
-            .map((c) => c.locale)
-            .join(', ')}.`
-    )
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log(
+            `[generateStaticParams] Static params fetched for ${slugCollection.length} locales: ${slugCollection
+                .map((c) => c.locale)
+                .join(', ')}.`
+        )
+    }
     return slugCollection
 }
 
 export default async function Home({ params, searchParams }: PageParams) {
     const { locale, slug } = params
-    console.log("Page component params:", { locale, slug });
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log("Page component params:", { locale, slug });
+    }
     /**
      * Automatically return notFound if it looks like a file path was requested as app updates result
      * in a new deployment and the old files are not available anymore.
      */
     if (slug && slug[slug.length - 1].includes('.')) {
-        console.log("File path detected, returning notFound");
+        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+            console.log("File path detected, returning notFound");
+        }
         notFound()
     }
-    console.log("Fetching story with params:", {
-        language: locale,
-        slug: slug ? slug : [],
-        resolve_links: 'story'
-    });
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log("Fetching story with params:", {
+            language: locale,
+            slug: slug ? slug : [],
+            resolve_links: 'story'
+        });
+    }
     const { story, error } = await fetchStories({
         language: locale,
         slug: slug ? slug : [],
         resolve_links: 'story',
     })
     if (!story || error) {
-        console.log('[CONTENT] ❌ Story not found for page', {
-            slug,
-            error,
-            story: story ? 'exists' : 'missing',
-            params: { locale, slug }
-        });
+        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+            console.log('[CONTENT] ❌ Story not found for page', {
+                slug,
+                error,
+                story: story ? 'exists' : 'missing',
+                params: { locale, slug }
+            });
+        }
         if (error) console.error(`[CONTENT] Error: ${error}`)
         notFound()
     }
-    console.log('[CONTENT] ✅ Story fetched: ', {
-        name: story.name,
-        full_slug: story.full_slug,
-        component: story.content?.component
-    });
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log('[CONTENT] ✅ Story fetched: ', {
+            name: story.name,
+            full_slug: story.full_slug,
+            component: story.content?.component
+        });
+    }
     return (
         <StoryblokComponent
             blok={story.content}
