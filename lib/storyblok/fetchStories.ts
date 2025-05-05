@@ -66,18 +66,18 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
     //     console.log("Language param:", params.language);
     //     console.log("StoryUrl after adding language:", storyUrl);
     // }
-    // Check if slug is empty. then return accordingly. if slug is empty it creates errors with storyblok
-    if (!slug || slug.length === 0) {
-        logWithContext('fetchStories.ts: ', "Slug is empty.");
-        return {
-          stories: [],
-          story: null,
-          cv: null,
-          rels: [],
-          links: [],
-          error: 'Empty slug — no story to fetch.',
-        }
-      }
+    // // Check if slug is empty. then return accordingly. if slug is empty it creates errors with storyblok
+    // if (!slug || slug.length === 0) {
+    //     logWithContext('fetchStories.ts: ', "Slug is empty.");
+    //     return {
+    //       stories: [],
+    //       story: null,
+    //       cv: null,
+    //       rels: [],
+    //       links: [],
+    //       error: 'Empty slug — no story to fetch.',
+    //     }
+    //   }
     if (slug) {
         /**
          * We need to get rid of the deployment name from the slug, that is prepended in preview mode
