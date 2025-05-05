@@ -33,6 +33,7 @@ export async function BlogHome({
     logWithContext('BlogHome.tsx: ', 'blogUrl: ', blogUrl);
     const { data: result } = await fetchStories({
         starts_with: full_slug,
+        language: locale
     })
     // Make sure to exclude the blog itself from the list of posts
     const posts = result?.stories.filter((story: Story) => story.full_slug !== full_slug) || []

@@ -60,6 +60,9 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
     if (params.language) {
         storyUrl += `${params.language}/`
     }
+    else {
+        storyUrl += `${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}/`
+    }
     logWithContext('fetchStories.ts: ', "Language param:", params.language);
     logWithContext('fetchStories.ts: ', "StoryUrl after adding language:", storyUrl);
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
