@@ -24,8 +24,13 @@ export async function BlogHome({
 }) {
     const { hero } = blok
     const { full_slug } = story
+    logWithContext('BlogHome.tsx: ', 'process.env.NEXT_PUBLIC_DEPLOYMENT_NAME: ',
+        process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
+    logWithContext('BlogHome.tsx: ', 'locale: ', locale);
     const DEPLOYMENT_URL = `${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/${locale.toLowerCase()}`
+    logWithContext('BlogHome.tsx: ', 'DEPLOYMENT_URL: ', DEPLOYMENT_URL);
     const blogUrl = full_slug.replace(DEPLOYMENT_URL, '') // E.g., /blog/
+    logWithContext('BlogHome.tsx: ', 'blogUrl: ', blogUrl);
     const { data: result } = await fetchStories({
         starts_with: full_slug,
     })
