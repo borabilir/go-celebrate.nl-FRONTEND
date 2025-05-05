@@ -5,11 +5,11 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-// import MiscellaneusHead from '@/components/seo/MiscellaneusHead'
-import MiscellaneusHead from '../components/seo/MiscellaneusHead'
+import MiscellaneusHead from '@/components/seo/MiscellaneusHead'
+// import MiscellaneusHead from '../components/seo/MiscellaneusHead'
 
-// import socialImageUrlBuilder from '@/utils/socialImageUrlBuilder'
-import socialImageUrlBuilder from '../utils/socialImageUrlBuilder'
+import socialImageUrlBuilder from '@/utils/socialImageUrlBuilder'
+// import socialImageUrlBuilder from '../utils/socialImageUrlBuilder'
 
 export default function StoryHead({ blok = {} }) {
     const {
