@@ -57,13 +57,16 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
     //     console.log("Initial storyUrl:", storyUrl);
     // }
     // if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
+    logWithContext('fetchStories.ts: ', "Language param:", params.language);
     if (params.language) {
         storyUrl += `${params.language}/`
     }
     else {
         storyUrl += `${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}/`
+        logWithContext('fetchStories.ts: ',
+            "Language param is not defined, adding default language instead:");
     }
-    logWithContext('fetchStories.ts: ', "Language param:", params.language);
+    
     logWithContext('fetchStories.ts: ', "StoryUrl after adding language:", storyUrl);
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Language param:", params.language);
