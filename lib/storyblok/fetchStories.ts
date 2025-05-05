@@ -100,8 +100,11 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         //     console.log("Params:", JSON.stringify(sbParams, null, 2));
         // }
         const response = await storyblokApi.get(storyUrl, sbParams)
-        logWithContext('fetchStories.ts: ', "✅ Response from Storyblok: ",
-            JSON.stringify(response.data, null, 2));
+        // logWithContext('fetchStories.ts: ', "✅ Response from Storyblok: ",
+        //     JSON.stringify(response.data, null, 2));
+        const json = JSON.stringify(response.data, null, 2);
+        const first20Lines = json.split('\n').slice(0, 10).join('\n');
+        logWithContext('fetchStories.ts:', "✅ First 10 lines of response:\n" + first20Lines);
         // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
         //     console.log("✅ Response from Storyblok: ", JSON.stringify(response.data, null, 2));
         // }
