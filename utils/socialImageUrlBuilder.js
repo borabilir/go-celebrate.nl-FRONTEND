@@ -1,3 +1,5 @@
+// This file might not be used. 
+
 import { buildImageUrl, extractPublicId } from 'cloudinary-build-url'
 
 export default function build(cloudinaryImageUrl) {
