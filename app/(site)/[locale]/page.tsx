@@ -24,6 +24,7 @@ export async function generateStaticParams({ params }: { params: any }) {
     const result = await fetchStories({
         // This will result in a single story from the deployment folder.
         slug: [],
+        language: DEFAULT_LANGUAGE
     })
 
     if (result?.story) {
