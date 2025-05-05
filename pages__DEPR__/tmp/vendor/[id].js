@@ -31,6 +31,10 @@ import {
 } from 'react-icons/bi'
 import { RiQuestionnaireLine } from 'react-icons/ri'
 
+import { logWithContext } from '@/utils/logger' 
+
+logWithContext('[id].js: ', 'This file is loaded - pages__DEPR__/tmp/vendor');
+
 export default function VendorCheck({
     id,
     token,
@@ -135,7 +139,10 @@ export default function VendorCheck({
                 },
             },
             onCompleted(data) {
-                console.log('data', data)
+                logWithContext('[id].js: ', 'data', data);
+                // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                //     console.log('data', data)
+                // }
                 setSubmitted(true)
                 showNotification({
                     title: 'Success!',
@@ -189,7 +196,11 @@ export default function VendorCheck({
                                 'Authorization': 'Bearer 5da6497d2cc695c868cb749e7096f18ff69e875e4a458905a14f4428f2ea54ef846cdd8f2a9773178e6d60ad94bb3c058d446e1bcbe114906a7d47e7df05cec99cc9e4eb570bd5c8a43e23a3217e50f2ec9e6c97806a5728b18de20bba835de05db9c426c92ceed1501780578668164d83b2915dc93db8704e578d68169adc9d'
                             },
                         },
-                        onCompleted(data) { console.log(data) }
+                        onCompleted(data) { 
+                            if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+                                console.log(data) 
+                            }
+                        }
                     })
                 }
             },

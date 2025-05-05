@@ -9,6 +9,8 @@ storyblokInit({
     use: [apiPlugin],
 })
 
+// chatgpt's guess of the usage of storyblokApi.get function
+// Specialized to build sitemaps, fetching paginated content.
 async function fetchStoryes(storyblokApi: any, locale: string, page: number = 1) {
     const DEPLOYMENT_URL = `${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/${locale.toLowerCase()}`
     const { data, perPage, total } = await storyblokApi.get(`cdn/stories/`, {

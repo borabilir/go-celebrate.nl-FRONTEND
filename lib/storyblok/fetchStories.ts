@@ -6,6 +6,7 @@ import { getStoryblokApi } from '@storyblok/react/rsc'
 
 import { GetStoriesParams, GetStoriesResponse } from '@/@types/storyblok'
 import { getErrorMessage } from '@/utils/errors'
+import { logWithContext } from '@/utils/logger';
 
 /**
  * If a slug is provided, fetch a single story. Otherwise, fetch multiple stories.
@@ -13,10 +14,12 @@ import { getErrorMessage } from '@/utils/errors'
  * if a slug is provided.
  */
 export async function fetchStories(params: GetStoriesParams): Promise<GetStoriesResponse> {
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("Inside fetchStories async function");
-        console.log("Params received:", JSON.stringify(params, null, 2));
-    }
+    logWithContext('fetchStories.ts: ', "Inside fetchStories async function");
+    logWithContext('fetchStories.ts: ', "Params received:", JSON.stringify(params, null, 2));
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Inside fetchStories async function");
+    //     console.log("Params received:", JSON.stringify(params, null, 2));
+    // }
     const { slug, cv, ...storyblokApiParams } = params
     const storyblokApi = getStoryblokApi()
     const sbParams: any = {
@@ -27,9 +30,10 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         cv: cv ? cv : process.env.NODE_ENV === 'production' ? undefined : Date.now(),
         token: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
     }
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("Storyblok API params:", JSON.stringify(sbParams, null, 2));
-    }
+    logWithContext('fetchStories.ts: ', "Storyblok API params:", JSON.stringify(sbParams, null, 2));
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Storyblok API params:", JSON.stringify(sbParams, null, 2));
+    // }
     /**
      * Transform each field from the params object into valid a query string.
      */
@@ -46,42 +50,61 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         }
     })
     let storyUrl = `cdn/stories/${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/`
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("Initial storyUrl:", storyUrl);
-    }
+    logWithContext('fetchStories.ts: ', "Initial deployment name:", process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
+    logWithContext('fetchStories.ts: ', "Initial storyUrl:", storyUrl);
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Initial deployment name:", process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
+    //     console.log("Initial storyUrl:", storyUrl);
+    // }
     // if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
     if (params.language) {
         storyUrl += `${params.language}/`
     }
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("StoryUrl after language:", storyUrl);
-    }
+    logWithContext('fetchStories.ts: ', "Language param:", params.language);
+    logWithContext('fetchStories.ts: ', "StoryUrl after adding language:", storyUrl);
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Language param:", params.language);
+    //     console.log("StoryUrl after adding language:", storyUrl);
+    // }
     if (slug) {
         /**
          * We need to get rid of the deployment name from the slug, that is prepended in preview mode
          * in the Storyblok editor.
          */
         const cleanedSlug = slug?.filter((s) => s !== process.env.NEXT_PUBLIC_DEPLOYMENT_NAME) || []
-        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-            console.log("Cleaned slug:", cleanedSlug);
-        }
+        logWithContext('fetchStories.ts: ', "Raw slug param:", slug);
+        logWithContext('fetchStories.ts: ', "Cleaned slug:", cleanedSlug);
+        logWithContext('fetchStories.ts: ', "StoryUrl after adding slug:", storyUrl);
+        // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        //     console.log("Raw slug param:", slug);
+        //     console.log("Cleaned slug:", cleanedSlug);
+        //     console.log("StoryUrl after adding slug:", storyUrl);
+        // }
         /**
          * Add the deployment name manually to ensure both production (without deployment name in the
          * slug) and preview mode (with deployment name prepended in the slug) work.
          */
         storyUrl += `${cleanedSlug?.join('/')}`
     }
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("Final storyUrl:", storyUrl);
-    }
+    logWithContext('fetchStories.ts: ', "Final storyUrl:", storyUrl);
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Final storyUrl:", storyUrl);
+    // }
+    // chatgpt's guess of the usage of storyblokApi.get function
+    // Generic wrapper used when the slug is optional (used widely across the app).
     try {
-        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-            console.log("Attempting to fetch from Storyblok with URL:", storyUrl);
-        }
+        logWithContext('fetchStories.ts: ', "Attempting to fetch from Storyblok with URL:", storyUrl);
+        logWithContext('fetchStories.ts: ', "Params:", JSON.stringify(sbParams, null, 2));
+        // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        //     console.log("Attempting to fetch from Storyblok with URL:", storyUrl);
+        //     console.log("Params:", JSON.stringify(sbParams, null, 2));
+        // }
         const response = await storyblokApi.get(storyUrl, sbParams)
-        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-            console.log("✅ Response from Storyblok: ", JSON.stringify(response.data, null, 2));
-        }
+        logWithContext('fetchStories.ts: ', "✅ Response from Storyblok: ",
+            JSON.stringify(response.data, null, 2));
+        // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        //     console.log("✅ Response from Storyblok: ", JSON.stringify(response.data, null, 2));
+        // }
         const data = await response?.data
         return data
     } catch (error) {

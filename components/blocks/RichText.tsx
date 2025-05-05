@@ -5,7 +5,9 @@ import { createElement } from 'react'
 import cn from 'classnames'
 import slugify from 'slugify'
 import { render, NODE_HEADING, NODE_OL, NODE_UL, NODE_LI } from 'storyblok-rich-text-react-renderer'
-import { initStoryblok } from '@/lib/storyblok'
+// import { initStoryblok } from '@/lib/storyblok'
+import { initStoryblok } from '@/lib/storyblok/initStoryblok'
+
 
 initStoryblok()
 

@@ -42,5 +42,10 @@ yarn-error.log*
 secrets.txt
 
 # Deprecated files/folders
+pages__DEPR__
+pages__DEPR__/
 /pages__DEPR__
+/pages__DEPR__/
+pages__DEPR__/*
 /pages__DEPR__/*
+supabase/.temp/

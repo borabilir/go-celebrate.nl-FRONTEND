@@ -20,7 +20,11 @@ import Occasions from '@/components/quote/Occasions'
 import PersonalDetails from '@/components/quote/PersonalDetails'
 import VenueAutocomplete from '@/components/quote/VenueAutocomplete'
 
+import { logWithContext } from '@/utils/logger' 
+
 import { FiChevronLeft, FiChevronRight, FiCheck, FiCalendar, FiEdit } from 'react-icons/fi'
+
+logWithContext('get-quote.js: ', 'This file is loaded - pages__DEPR__');
 
 const steps = [
     'occasion',
@@ -102,7 +106,10 @@ export default function GetQuote({
         variables: { locale },
     })
     useEffect(() => {
-        console.log(occasionsData)
+        logWithContext('get-quote.js: ', occasionsData);
+        // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        //     console.log(occasionsData)
+        // }
         setOccasions(occasionsData)
     }, [occasionsData])
 

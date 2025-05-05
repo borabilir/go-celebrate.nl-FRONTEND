@@ -1,4 +1,5 @@
-import { fetchLinks } from '@/lib/storyblok'
+// import { fetchLinks } from '@/lib/storyblok'
+import { fetchLinks } from '@/lib/storyblok/fetchLinks'
 import { sanitizeStoryblokSlugs } from '@/utils/sanitizeStoryblokSlugs'
 import { StoryLink } from '@/@types/storyblok'
 import RootPage from '../page'

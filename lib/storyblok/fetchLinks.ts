@@ -14,6 +14,9 @@ import { getErrorMessage } from '@/utils/errors';
  * The response will be an array of stories if multiple stories are fetched, or a single story
  * if a slug is provided.
  */
+
+// chatgpt's guess of the usage of storyblokApi.get function
+// Fetches link tree / navigation metadata from Storyblok.
 export async function fetchLinks(params: GetLinksParams = {}): Promise<GetLinksResponse> {
   const storyblokApi = getStoryblokApi();
   const sbParams: any = {};

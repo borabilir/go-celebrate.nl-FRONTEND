@@ -1,6 +1,9 @@
 // @ts-ignore
 import { getStoryblokApi } from '@storyblok/react/rsc'
 
+
+// chatgpt's guess of the usage of storyblokApi.get function
+// Fetches a single story by slug (used in routing or dynamic pages).
 export async function fetchData(pathSegment: string, locale = 'nl') {
     const storyblokApi = getStoryblokApi()
     try {
@@ -18,6 +21,8 @@ export async function fetchData(pathSegment: string, locale = 'nl') {
     }
 }
 
+// chatgpt's guess of the usage of storyblokApi.get function
+// Fetches multiple stories filtered by prefix (e.g., blog posts, products).
 export async function fetchStories({
     starts_with,
     sort_by = 'published_at:desc',

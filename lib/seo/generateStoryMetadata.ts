@@ -1,6 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next'
 
-import { fetchStories } from '@/lib/storyblok'
+// import { fetchStories } from '@/lib/storyblok'
+import { fetchStories } from '@/lib/storyblok/fetchStories'
 import type { PageParams } from '@/@types/globals.d.ts'
 
 const DEPLOYMENT_NAME = process.env.NEXT_PUBLIC_DEPLOYMENT_NAME as string

@@ -2,10 +2,12 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 
 import { StoryblokComponent } from '@/components/helpers/StoryblokComponent/StoryblokComponent'
-import { fetchStories } from '@/lib/storyblok'
+// import { fetchStories } from '@/lib/storyblok'
+import { fetchStories } from '@/lib/storyblok/fetchStories'
 import { generateStoryMetadata } from '@/lib/seo'
 
 import type { PageParams } from '@/@types/globals.d.ts'
+import { logWithContext } from '@/utils/logger';
 
 const DEFAULT_LANGUAGE = process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE as string
 
@@ -30,52 +32,66 @@ export async function generateStaticParams({ params }: { params: any }) {
         // Loop over the translated_slugs of the story to check if the content exists in other locales.
         for (const index in result.story.translated_slugs) {
             const storyTranslatedSlug = result.story.translated_slugs[index]
-            if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-                console.log('Fetching for', storyTranslatedSlug.lang)
-            }
+            logWithContext('page.tsx: ', 'Fetching for', storyTranslatedSlug.lang);
+            // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+            //     console.log('Fetching for', storyTranslatedSlug.lang)
+            // }
             const localeStory = await fetchStories({
                 slug: [],
                 language: storyTranslatedSlug.lang,
             })
-            if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-                console.log('Locale story fetched...')
-            }
+            logWithContext('page.tsx: ', 'Locale story fetched...');
+            // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+            //     console.log('Locale story fetched...')
+            // }
             // If a story exist, we support that locale, let's generate the content for it.
             if (localeStory?.story) slugCollection.push({ locale: storyTranslatedSlug.lang })
         }
     }
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log(
-            `[generateStaticParams] Static params fetched for ${slugCollection.length} locales: ${slugCollection
-                .map((c) => c.locale)
-                .join(', ')}.`
-        )
-    }
+    logWithContext('page.tsx: ',
+        `[generateStaticParams] Static params fetched for ${slugCollection.length} locales: ${slugCollection
+            .map((c) => c.locale)
+            .join(', ')}.`
+        );
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log(
+    //         `[generateStaticParams] Static params fetched for ${slugCollection.length} locales: ${slugCollection
+    //             .map((c) => c.locale)
+    //             .join(', ')}.`
+    //     )
+    // }
     return slugCollection
 }
 
 export default async function Home({ params, searchParams }: PageParams) {
     const { locale, slug } = params
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("Page component params:", { locale, slug });
-    }
+    logWithContext('page.tsx: ', { locale, slug });
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Page component params:", { locale, slug });
+    // }
     /**
      * Automatically return notFound if it looks like a file path was requested as app updates result
      * in a new deployment and the old files are not available anymore.
      */
     if (slug && slug[slug.length - 1].includes('.')) {
-        if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-            console.log("File path detected, returning notFound");
-        }
+        logWithContext('page.tsx: ', "File path detected, returning notFound");
+        // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        //     console.log("File path detected, returning notFound");
+        // }
         notFound()
     }
-    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log("Fetching story with params:", {
+    logWithContext('page.tsx: ', "Fetching story with params:", {
             language: locale,
             slug: slug ? slug : [],
             resolve_links: 'story'
         });
-    }
+    // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+    //     console.log("Fetching story with params:", {
+    //         language: locale,
+    //         slug: slug ? slug : [],
+    //         resolve_links: 'story'
+    //     });
+    // }
     const { story, error } = await fetchStories({
         language: locale,
         slug: slug ? slug : [],

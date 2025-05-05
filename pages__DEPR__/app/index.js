@@ -9,13 +9,19 @@ import dashboardLayout from '@/layouts/dashboard'
 import MyEventsQuery from '@/apollo/queries/event/myEventsQuery.gql'
 import EventCard from '@/components/dashboard/EventCard'
 
+import { logWithContext } from '@/utils/logger' 
+
+logWithContext('index.js: ', 'This file is loaded - pages__DEPR__/app');
+
 export default function Dashboard({ events, meta, fetchError }) {
     const { t } = useTranslation(['common'])
     const {
         data: { user },
         status,
     } = useSession()
-    console.log(meta)
+    if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
+        console.log(meta)
+    }
     return (
         <div className="grow max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="heading-2 mt-12 mb-12">

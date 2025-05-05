@@ -4,7 +4,8 @@ import globals from '@/cache/globals.json'
 import { NextAuthProvider } from '@/components/providers/Session'
 import { SWRProvider } from '@/components/providers/SWR'
 import { useServerLocale } from '@hooks/useServerLocale'
-import { initStoryblok } from '@/lib/storyblok'
+// import { initStoryblok } from '@/lib/storyblok'
+import { initStoryblok } from '@/lib/storyblok/initStoryblok'
 
 import 'swiper/css'
 

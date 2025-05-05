@@ -1,7 +1,12 @@
 import Hero from '@/components/blocks/Hero/Hero'
 import { BlogPostsGrid } from '@/components/blocks/BlogPostsGrid'
 import type { StoryblokPageSeo, StoryblokBlok, Story } from '@/@types/storyblok'
-import { fetchStories } from '@/lib/storyblok.server'
+// import { fetchStories } from '@/lib/storyblok.server'
+import { fetchStories } from '@/lib/storyblok/fetchStories'
+import { logWithContext } from '@/utils/logger'
+
+logWithContext('BlogHome.tsx: ', 'BlogHome component loaded');
+
 
 export interface BlogHomeProps {
     seo: StoryblokPageSeo
