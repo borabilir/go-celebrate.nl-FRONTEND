@@ -2,11 +2,15 @@ import { useState } from 'react'
 import cn from 'classnames'
 import Image from 'next/image'
 
-import storyblokImageLoader from '@/utils/storyblokImageLoader'
-import useWindowSize from '@/hooks/useWindowSize'
+// import storyblokImageLoader from '@/utils/storyblokImageLoader'
+import storyblokImageLoader from '../utils/storyblokImageLoader'
+// import useWindowSize from '@/hooks/useWindowSize'
+import useWindowSize from '../hooks/useWindowSize'
 
-import Dialog from '@/components/Dialog'
-import PhotoGridSlider from '@/components/PhotoGridSlider'
+// import Dialog from '@/components/Dialog'
+import Dialog from '../components/Dialog'
+// import PhotoGridSlider from '@/components/PhotoGridSlider'
+import PhotoGridSlider from '../components/PhotoGridSlider'
 
 export default function OfferingsPotoGrid({
     images: { data: images } = {},

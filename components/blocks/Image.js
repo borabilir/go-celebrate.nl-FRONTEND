@@ -1,5 +1,6 @@
 'use client'
-import storyblokImageLoader from '@/utils/storyblokImageLoader'
+// import storyblokImageLoader from '@/utils/storyblokImageLoader'
+import storyblokImageLoader from '../utils/storyblokImageLoader'
 import Image from 'next/legacy/image'
 
 export default function ImageBlok({

@@ -5,7 +5,8 @@
 
 import Image from 'next/legacy/image'
 
-import storyblokImageLoader from '@/utils/storyblokImageLoader'
+// import storyblokImageLoader from '@/utils/storyblokImageLoader'
+import storyblokImageLoader from '../utils/storyblokImageLoader'
 
 export default function BlockImage({ image, className, layout, sizes = '100vw', priority = false }) {
     const {
