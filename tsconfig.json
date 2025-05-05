@@ -20,6 +20,7 @@
             "@hooks/*": ["./hooks/*"],
             "@icons/*": ["./components/icons/*"],
             "@/*": ["./*"],
+            "../*": ["./*"],
             "@i18n": ["./lib/i18n/index"],
             "@i18n/*": ["./lib/i18n/*"],
             "@types/*": ["./@types/*"]
