@@ -16,10 +16,10 @@ export async function generateStaticParams() {
                 limit: 10000,
             },
         }
-        const { data } = await getClient().query({ query: MinimalOfferingsQuery, variables })
-        data?.offerings?.data.map((offering: any) => {
-            slugs.push({ slug: offering.attributes.key })
-        })
+        // const { data } = await getClient().query({ query: MinimalOfferingsQuery, variables })
+        // data?.offerings?.data.map((offering: any) => {
+        //     slugs.push({ slug: offering.attributes.key })
+        // })
     }
     if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
         console.log('[generateStaticParams] Static params fetched for', slugs.length, 'slugs.')
