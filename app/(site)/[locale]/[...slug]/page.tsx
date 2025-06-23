@@ -11,7 +11,7 @@ export { generateMetadata } from '../page'
 const NEXT_PUBLIC_DEFAULT_LOCALE = process.env.NEXT_PUBLIC_NEXT_PUBLIC_DEFAULT_LOCALE as string
 
 export async function generateStaticParams() {
-    const slugCollection: { locale: string; slug: string[] }[] = []
+    const slugCollection: { [key: string]: string | string[] }[] = []
     const results = await fetchLinks({})
     if (results?.links) {
         /**
@@ -20,28 +20,23 @@ export async function generateStaticParams() {
          * property where we need to look for the 'translated_slug' and 'lang' properties.
          */
 
-        Object.keys(results.links).forEach((key) => {
+        Object.keys(results?.links).forEach((key) => {
             const link = results.links[key] as StoryLink
             /**
              * Folders are not pages, so we don't want to generate them into pages. Root stories
              * in folders are the actual content.
              */
-            // if (link.is_folder) return
+            if (link.is_folder) return
             /**
              * Globals are general content types for the entire site, we don't want them to be
              * generated into pages, thus exclude them from the static params.
              */
-            // if (link.slug?.includes('globals')) return
-            // const slug = sanitizeStoryblokSlugs(link.slug)
-            //     .split('/')
-            //     .filter((s) => !!s)
-            // // If the slug is emty, it means we're on the root page, return
-            // if (slug.length === 0) return
-            if (link.is_folder || link.slug?.includes('globals')) return
-
-            const cleanSlug = sanitizeStoryblokSlugs(link.slug).replace('go-celebrate-nl/', '')
-            const slug = cleanSlug.split('/').filter((s) => !!s)
-
+            if (link.slug?.includes('globals')) return
+            const slug = sanitizeStoryblokSlugs(link.slug)
+                .split('/')
+                .filter((s) => !!s)
+            // If the slug is emty, it means we're on the root page, return
+            if (slug.length === 0) return
             // First, handle stories with the default locale
             slugCollection.push({
                 locale: NEXT_PUBLIC_DEFAULT_LOCALE,
@@ -55,21 +50,19 @@ export async function generateStaticParams() {
                  * eventually the translated content gets published, the page will be generated.
                  */
                 link.alternates.forEach((alternate) => {
-                    const cleanAltSlug = sanitizeStoryblokSlugs(alternate.translated_slug).replace(
-                        'go-celebrate-nl/',
-                        ''
-                    )
-                    const alternateSlug = cleanAltSlug.split('/').filter((s) => !!s)
-                    slugCollection.push({ locale: alternate.lang, slug: alternateSlug })
+                    const alternateSlug = sanitizeStoryblokSlugs(alternate.translated_slug)
+                        .split('/')
+                        .filter((s) => !!s)
+                    slugCollection.push({
+                        locale: alternate.lang,
+                        slug: alternateSlug,
+                    })
                 })
             }
         })
     }
     if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log(
-            '[generateStaticParams] Static params for content [slug] fetched. Total pages: ',
-            slugCollection.length
-        )
+        console.log('[generateStaticParams] Static params for content [slug] fetched. Total pages: ', slugCollection.length)
     }
     return slugCollection
 }

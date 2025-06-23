@@ -21,6 +21,8 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
     //     console.log("Params received:", JSON.stringify(params, null, 2));
     // }
     const { slug, cv, ...storyblokApiParams } = params
+    console.log(slug?.join(', '));
+
     const storyblokApi = getStoryblokApi()
     const sbParams: any = {
         /**
