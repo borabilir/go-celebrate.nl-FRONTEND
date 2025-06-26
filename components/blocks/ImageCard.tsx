@@ -20,7 +20,7 @@ export default function ImageCard({ blok }: { blok: StoryblokBlok<any> }) {
         <li className="relative aspect-w-4 aspect-h-5 rounded-lg overflow-hidden">
             {(url || filename) && (
                 <Image
-                    loader={storyblokImageLoader}
+                    // loader={storyblokImageLoader}
                     src={url || filename}
                     alt={alternativeText || name || ' '}
                     layout="fill"
