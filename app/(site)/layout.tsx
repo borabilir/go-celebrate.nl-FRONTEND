@@ -11,7 +11,7 @@ import 'swiper/css'
 
 initStoryblok()
 
-export const revalidate = 1
+export const revalidate = 3600
 
 export default function SiteLayout({ children, params }: { children: React.ReactNode; params: any }) {
     const { locale } = useServerLocale(params)
