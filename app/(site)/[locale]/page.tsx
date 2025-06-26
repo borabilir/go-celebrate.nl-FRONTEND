@@ -100,20 +100,17 @@ export default async function Home({ params, searchParams }: PageParams) {
         resolve_links: 'story',
     })
     if (!story || error) {
-        if (process.env.NEXT_PHASE === 'phase-export') {
-            console.warn('[CONTENT] 🟡 Story not found during export, skipping page:', {
-                slug,
-                locale,
-            })
+        console.warn('[CONTENT] 🟡 Story not found during export, skipping page:', {
+            slug,
+            locale,
+        })
 
-            return (
-                <div style={{ padding: 40 }}>
-                    <h1>Page Coming Soon</h1>
-                    <p>This content is not yet published.</p>
-                </div>
-            )
-        }
-        notFound()
+        return (
+            <div style={{ padding: 40 }}>
+                <h1>Page Coming Soon</h1>
+                <p>This content is not yet published.</p>
+            </div>
+        )
     }
 
     if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
