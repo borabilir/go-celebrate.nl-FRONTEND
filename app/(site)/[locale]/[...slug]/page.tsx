@@ -8,7 +8,7 @@ export const revalidate = 3600 // revalidate at most every hour
 
 export { generateMetadata } from '../page'
 
-const NEXT_PUBLIC_DEFAULT_LOCALE = process.env.NEXT_PUBLIC_NEXT_PUBLIC_DEFAULT_LOCALE as string
+const NEXT_PUBLIC_DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE as string
 
 export async function generateStaticParams() {
     const slugCollection: { [key: string]: string | string[] }[] = []
@@ -62,8 +62,17 @@ export async function generateStaticParams() {
         })
     }
     if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log('[generateStaticParams] Static params for content [slug] fetched. Total pages: ', slugCollection.length)
+        console.log(
+            '[generateStaticParams] Static params for content [slug] fetched. Total pages: ',
+            slugCollection.length
+        )
     }
+
+    slugCollection.forEach(({ locale, slug }) => {
+        const formatted = Array.isArray(slug) ? slug.join('/') : slug
+        console.log(`[SSG] Generated: /${locale}/${formatted}`)
+    })
+
     return slugCollection
 }
 

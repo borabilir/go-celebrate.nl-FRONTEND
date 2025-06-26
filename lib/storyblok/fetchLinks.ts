@@ -42,6 +42,8 @@ export async function fetchLinks(params: GetLinksParams = {}): Promise<GetLinksR
       per_page: results?.perPage || 0,
       page: params?.page || 1
     };
+    // console.log("response fetch Links");
+    // console.log(response);
     return response;
   } catch (error) {
     console.error('fetchLinks error', error);
