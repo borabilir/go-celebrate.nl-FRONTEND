@@ -33,3 +33,5 @@ export function BlogPostsGrid({ blok }: { blok: BlogPostGridProps }) {
         </Section>
     )
 }
+
+export default BlogPostsGrid
