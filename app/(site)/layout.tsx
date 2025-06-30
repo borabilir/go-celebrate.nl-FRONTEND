@@ -1,6 +1,6 @@
 import { Footer } from '@/components/layout/Footer'
 import { Navbar } from '@/components/layout/Navbar'
-import globals from '@/cache/globals.json'
+import * as globals from '@/cache/globals.json'
 import { NextAuthProvider } from '@/components/providers/Session'
 import { SWRProvider } from '@/components/providers/SWR'
 import { useServerLocale } from '@hooks/useServerLocale'
@@ -22,7 +22,7 @@ export default function SiteLayout({ children, params }: { children: React.React
         <>
             <NextAuthProvider>
                 <SWRProvider>
-                    {/* <Navbar globals={extractLocalGloblas(globals, locale)} /> */}
+                    <Navbar globals={extractLocalGloblas(globals, locale)} />
                     {children}
                     <Footer globals={extractLocalGloblas(globals, locale)} />
                 </SWRProvider>
