@@ -1,12 +1,11 @@
-import {
-  StoryblokComponent as OriginalStoryblokComponent,
-  storyblokEditable
-} from '@storyblok/react/rsc';
+import { StoryblokComponent as OriginalStoryblokComponent, storyblokEditable } from '@storyblok/react/rsc'
 
 export function StoryblokComponent(props: any) {
-  return <OriginalStoryblokComponent {...props} {...storyblokEditable(props.blok)} />;
-}
+    const component = props.blok?.component
+    console.log(`[StoryblokComponent] Rendering: ${component}`, props)
 
+    return <OriginalStoryblokComponent {...props} {...storyblokEditable(props.blok)} />
+}
 /* // Content types
 import { HelpArticle } from '@/components/contentTypes/HelpArticle';
 import { HelpCollection } from '@/components/contentTypes/HelpCollection';
