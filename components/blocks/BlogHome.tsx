@@ -5,8 +5,7 @@ import type { StoryblokPageSeo, StoryblokBlok, Story } from '@/@types/storyblok'
 import { fetchStories } from '@/lib/storyblok/fetchStories'
 import { logWithContext } from '@/utils/logger'
 
-logWithContext('BlogHome.tsx: ', 'BlogHome component loaded');
-
+logWithContext('BlogHome.tsx: ', 'BlogHome component loaded')
 
 export interface BlogHomeProps {
     seo: StoryblokPageSeo
@@ -24,26 +23,27 @@ export async function BlogHome({
 }) {
     const { hero } = blok
     const { full_slug } = story
-    logWithContext('BlogHome.tsx: ', 'process.env.NEXT_PUBLIC_DEPLOYMENT_NAME: ',
-        process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
-    logWithContext('BlogHome.tsx: ', 'locale: ', locale);
+    logWithContext(
+        'BlogHome.tsx: ',
+        'process.env.NEXT_PUBLIC_DEPLOYMENT_NAME: ',
+        process.env.NEXT_PUBLIC_DEPLOYMENT_NAME
+    )
+    logWithContext('BlogHome.tsx: ', 'locale: ', locale)
     const DEPLOYMENT_URL = `${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/${locale.toLowerCase()}`
-    logWithContext('BlogHome.tsx: ', 'DEPLOYMENT_URL: ', DEPLOYMENT_URL);
+    logWithContext('BlogHome.tsx: ', 'DEPLOYMENT_URL: ', DEPLOYMENT_URL)
     const blogUrl = full_slug.replace(DEPLOYMENT_URL, '') // E.g., /blog/
-    logWithContext('BlogHome.tsx: ', 'blogUrl: ', blogUrl);
+    logWithContext('BlogHome.tsx: ', 'blogUrl: ', blogUrl)
     // const { data: result } = await fetchStories({
     //     starts_with: full_slug,
     //     language: locale
     // })
     const result = await fetchStories({
         starts_with: full_slug,
-        language: locale
+        language: locale,
     })
     // Make sure to exclude the blog itself from the list of posts
     // const posts = result?.stories.filter((story: Story) => story.full_slug !== full_slug) || []
-    const posts = (result.stories ?? []).filter(
-        (story: Story) => story.full_slug !== full_slug
-      )
+    const posts = (result.stories ?? []).filter((story: Story) => story.full_slug !== full_slug)
     return (
         <div className="space-y-10 md:space-y-16">
             {hero && hero[0] && <Hero blok={hero[0]} />}
@@ -56,3 +56,5 @@ export async function BlogHome({
         </div>
     )
 }
+
+export default BlogHome

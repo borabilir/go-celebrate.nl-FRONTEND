@@ -5,9 +5,9 @@ import dynamic from 'next/dynamic'
 
 const OfferingList = dynamic(() => import('@/components/OfferingList'))
 
-import { BlogHome } from '@/components/blocks/BlogHome'
 import { OfferingsGrid } from '@/components/blocks/OfferingsGrid'
 import Page from '@/components/Page'
+const BlogHome = dynamic(() => import('@/components/blocks/BlogHome'))
 const HomeHero = dynamic(() => import('@/components/blocks/HomeHero'))
 const SplitTextImage = dynamic(() => import('@/components/blocks/SplitTextImage'))
 const CategoryGroups = dynamic(() => import('@/components/blocks/CategoryGroups'))
