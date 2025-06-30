@@ -22,7 +22,7 @@ export default function SiteLayout({ children, params }: { children: React.React
         <>
             <NextAuthProvider>
                 <SWRProvider>
-                    <Navbar globals={extractLocalGloblas(globals, locale)} />
+                    {/* <Navbar globals={extractLocalGloblas(globals, locale)} /> */}
                     {children}
                     <Footer globals={extractLocalGloblas(globals, locale)} />
                 </SWRProvider>
