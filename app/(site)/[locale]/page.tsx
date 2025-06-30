@@ -9,7 +9,6 @@ import { generateStoryMetadata } from '@/lib/seo'
 import type { PageParams } from '@/@types/globals.d.ts'
 import { logWithContext } from '@/utils/logger'
 
-export const revalidate = 3600 // revalidate at most every hour
 const DEFAULT_LANGUAGE = process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE as string
 
 export async function generateMetadata(props: PageParams): Promise<Metadata> {
