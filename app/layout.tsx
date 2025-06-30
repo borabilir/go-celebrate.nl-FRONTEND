@@ -12,9 +12,6 @@ import { storyblokInit, apiPlugin } from '@storyblok/react/rsc'
 import StoryblokBridgeLoader from '@storyblok/react/bridge-loader'
 
 import EmotionProvider from '@/components/providers/Emotion'
-import { initStoryblok } from '@/lib/storyblok'
-
-initStoryblok();
 
 const poppins = Poppins({
     weight: ['400', '500', '600', '700'],

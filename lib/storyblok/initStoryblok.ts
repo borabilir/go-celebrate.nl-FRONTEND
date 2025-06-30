@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 
 const OfferingList = dynamic(() => import('@/components/OfferingList'))
 
-// import { OfferingsGrid } from '@/components/blocks/OfferingsGrid'
-const Page = dynamic(() => import('@/components/Page'))
+import { OfferingsGrid } from '@/components/blocks/OfferingsGrid'
+import Page from '@/components/Page'
 const BlogHome = dynamic(() => import('@/components/blocks/BlogHome'))
 const HomeHero = dynamic(() => import('@/components/blocks/HomeHero'))
 const SplitTextImage = dynamic(() => import('@/components/blocks/SplitTextImage'))
@@ -18,7 +18,7 @@ const CardGrid = dynamic(() => import('@/components/blocks/CardGrid'))
 const IconCard = dynamic(() => import('@/components/blocks/IconCard'))
 const ImageCard = dynamic(() => import('@/components/blocks/ImageCard'))
 const GetQuote = dynamic(() => import('@/components/blocks/GetQuote'))
-const BlogPostsGrid = dynamic(() => import('@/components/blocks/BlogPostsGrid'))
+import { BlogPostsGrid } from '@/components/blocks/BlogPostsGrid'
 const LogoGrid = dynamic(() => import('@/components/blocks/LogoGrid'))
 const TableOfContents = dynamic(() => import('@/components/blocks/TableOfContents'))
 const Separator = dynamic(() => import('@/components/blocks/Separator'))
@@ -60,6 +60,6 @@ export const initStoryblok = ({ excludeComponents }: { excludeComponents?: boole
                   Button,
                   Collapse,
                   Page,
-                  //   OfferingsGrid,
+                  OfferingsGrid,
               },
     })
