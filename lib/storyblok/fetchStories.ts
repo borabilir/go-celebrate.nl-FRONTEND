@@ -14,8 +14,8 @@ import { logWithContext } from '@/utils/logger';
  * if a slug is provided.
  */
 export async function fetchStories(params: GetStoriesParams): Promise<GetStoriesResponse> {
-    logWithContext('fetchStories.ts: ', "Inside fetchStories async function");
-    logWithContext('fetchStories.ts: ', "Params received:", JSON.stringify(params, null, 2));
+    // logWithContext('fetchStories.ts: ', "Inside fetchStories async function");
+    // logWithContext('fetchStories.ts: ', "Params received:", JSON.stringify(params, null, 2));
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Inside fetchStories async function");
     //     console.log("Params received:", JSON.stringify(params, null, 2));
@@ -32,7 +32,7 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         cv: cv ? cv : process.env.NODE_ENV === 'production' ? undefined : Date.now(),
         token: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
     }
-    logWithContext('fetchStories.ts: ', "Storyblok API params:", JSON.stringify(sbParams, null, 2));
+    // logWithContext('fetchStories.ts: ', "Storyblok API params:", JSON.stringify(sbParams, null, 2));
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Storyblok API params:", JSON.stringify(sbParams, null, 2));
     // }
@@ -52,14 +52,14 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         }
     })
     let storyUrl = `cdn/stories/${process.env.NEXT_PUBLIC_DEPLOYMENT_NAME}/`
-    logWithContext('fetchStories.ts: ', "Initial deployment name:", process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
-    logWithContext('fetchStories.ts: ', "Initial storyUrl:", storyUrl);
+    // logWithContext('fetchStories.ts: ', "Initial deployment name:", process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
+    // logWithContext('fetchStories.ts: ', "Initial storyUrl:", storyUrl);
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Initial deployment name:", process.env.NEXT_PUBLIC_DEPLOYMENT_NAME);
     //     console.log("Initial storyUrl:", storyUrl);
     // }
     // if (params.language && params.language !== process.env.NEXT_PUBLIC_DEFAULT_LOCALE) {
-    logWithContext('fetchStories.ts: ', "Language param:", params.language);
+    // logWithContext('fetchStories.ts: ', "Language param:", params.language);
     if (params.language) {
         storyUrl += `${params.language}/`
     }
@@ -69,14 +69,14 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
             "Language param is not defined, adding default language instead:");
     }
     
-    logWithContext('fetchStories.ts: ', "StoryUrl after adding language:", storyUrl);
+    // logWithContext('fetchStories.ts: ', "StoryUrl after adding language:", storyUrl);
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Language param:", params.language);
     //     console.log("StoryUrl after adding language:", storyUrl);
     // }
     // Check if slug is empty. then return accordingly. if slug is empty it creates errors with storyblok
     if (!slug || slug.length === 0) {
-        logWithContext('fetchStories.ts: ', "Slug is empty.");
+        // logWithContext('fetchStories.ts: ', "Slug is empty.");
         return {
           stories: [],
           story: null,
@@ -92,9 +92,9 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
          * in the Storyblok editor.
          */
         const cleanedSlug = slug?.filter((s) => s !== process.env.NEXT_PUBLIC_DEPLOYMENT_NAME) || []
-        logWithContext('fetchStories.ts: ', "Raw slug param:", slug);
-        logWithContext('fetchStories.ts: ', "Cleaned slug:", cleanedSlug);
-        logWithContext('fetchStories.ts: ', "StoryUrl after adding slug:", storyUrl);
+        // logWithContext('fetchStories.ts: ', "Raw slug param:", slug);
+        // logWithContext('fetchStories.ts: ', "Cleaned slug:", cleanedSlug);
+        // logWithContext('fetchStories.ts: ', "StoryUrl after adding slug:", storyUrl);
         // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
         //     console.log("Raw slug param:", slug);
         //     console.log("Cleaned slug:", cleanedSlug);
@@ -106,15 +106,15 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
          */
         storyUrl += `${cleanedSlug?.join('/')}`
     }
-    logWithContext('fetchStories.ts: ', "Final storyUrl:", storyUrl);
+    // logWithContext('fetchStories.ts: ', "Final storyUrl:", storyUrl);
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Final storyUrl:", storyUrl);
     // }
     // chatgpt's guess of the usage of storyblokApi.get function
     // Generic wrapper used when the slug is optional (used widely across the app).
     try {
-        logWithContext('fetchStories.ts: ', "Attempting to fetch from Storyblok with URL:", storyUrl);
-        logWithContext('fetchStories.ts: ', "Params:", JSON.stringify(sbParams, null, 2));
+        // logWithContext('fetchStories.ts: ', "Attempting to fetch from Storyblok with URL:", storyUrl);
+        // logWithContext('fetchStories.ts: ', "Params:", JSON.stringify(sbParams, null, 2));
         // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
         //     console.log("Attempting to fetch from Storyblok with URL:", storyUrl);
         //     console.log("Params:", JSON.stringify(sbParams, null, 2));
@@ -124,7 +124,7 @@ export async function fetchStories(params: GetStoriesParams): Promise<GetStories
         //     JSON.stringify(response.data, null, 2));
         const json = JSON.stringify(response.data, null, 2);
         const first20Lines = json.split('\n').slice(0, 10).join('\n');
-        logWithContext('fetchStories.ts:', "✅ First 10 lines of response:\n" + first20Lines);
+        // logWithContext('fetchStories.ts:', "✅ First 10 lines of response:\n" + first20Lines);
         // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
         //     console.log("✅ Response from Storyblok: ", JSON.stringify(response.data, null, 2));
         // }

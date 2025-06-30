@@ -41,7 +41,7 @@ export async function generateStaticParams({ params }: { params: any }) {
                 slug: [],
                 language: storyTranslatedSlug.lang,
             })
-            logWithContext('page.tsx: ', 'Locale story fetched...')
+            // logWithContext('page.tsx: ', 'Locale story fetched...')
             // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
             //     console.log('Locale story fetched...')
             // }
@@ -67,7 +67,7 @@ export async function generateStaticParams({ params }: { params: any }) {
 
 export default async function Home({ params, searchParams }: PageParams) {
     const { locale, slug } = params
-    logWithContext('page.tsx: ', { locale, slug })
+    // logWithContext('page.tsx: ', { locale, slug })
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Page component params:", { locale, slug });
     // }
@@ -76,17 +76,17 @@ export default async function Home({ params, searchParams }: PageParams) {
      * in a new deployment and the old files are not available anymore.
      */
     if (slug && slug[slug.length - 1].includes('.')) {
-        logWithContext('page.tsx: ', 'File path detected, returning notFound')
+        // logWithContext('page.tsx: ', 'File path detected, returning notFound')
         // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
         //     console.log("File path detected, returning notFound");
         // }
         notFound()
     }
-    logWithContext('page.tsx: ', 'Fetching story with params:', {
-        language: locale,
-        slug: slug ? slug : [],
-        resolve_links: 'story',
-    })
+    // logWithContext('page.tsx: ', 'Fetching story with params:', {
+    //     language: locale,
+    //     slug: slug ? slug : [],
+    //     resolve_links: 'story',
+    // })
     // if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
     //     console.log("Fetching story with params:", {
     //         language: locale,
@@ -100,10 +100,10 @@ export default async function Home({ params, searchParams }: PageParams) {
         resolve_links: 'story',
     })
     if (!story || error) {
-        console.warn('[CONTENT] 🟡 Story not found during export, skipping page:', {
-            slug,
-            locale,
-        })
+        // console.warn('[CONTENT] 🟡 Story not found during export, skipping page:', {
+        //     slug,
+        //     locale,
+        // })
 
         return (
             <div style={{ padding: 40 }}>
@@ -114,11 +114,11 @@ export default async function Home({ params, searchParams }: PageParams) {
     }
 
     if (process.env.NEXT_PUBLIC_INFO_LOGGING_MODE === 'true') {
-        console.log('[CONTENT] ✅ Story fetched: ', {
-            name: story.name,
-            full_slug: story.full_slug,
-            component: story.content?.component,
-        })
+        // console.log('[CONTENT] ✅ Story fetched: ', {
+        //     name: story.name,
+        //     full_slug: story.full_slug,
+        //     component: story.content?.component,
+        // })
     }
     return (
         <StoryblokComponent

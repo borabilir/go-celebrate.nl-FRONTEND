@@ -15,6 +15,9 @@ export const revalidate = 3600
 
 export default function SiteLayout({ children, params }: { children: React.ReactNode; params: any }) {
     const { locale } = useServerLocale(params)
+
+    console.log('[Server Layout] locale:', locale)
+
     return (
         <>
             <NextAuthProvider>
@@ -30,5 +33,7 @@ export default function SiteLayout({ children, params }: { children: React.React
 
 const extractLocalGloblas = (globals: any, locale: string) => {
     const { [locale]: localeGlobals } = globals
+    console.log('[Server Layout] globals:', localeGlobals)
+
     return localeGlobals?.content
 }
